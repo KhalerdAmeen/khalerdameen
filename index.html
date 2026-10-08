@@ -37,131 +37,562 @@
     }
 
     .container {
-      max-width: 380px;
+      max-width: 420px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 72px 24px 56px;
+    }
+
+    /* ---------- greeting ---------- */
+    .greeting {
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(200, 146, 42, 0.7);
+      min-height: 1.2em;
+      margin-bottom: 20px;
+    }
+    .greeting .caret {
+      display: inline-block;
+      width: 1px;
+      margin-left: 1px;
+      opacity: 0.7;
+      animation: blinkCaret 1s step-end infinite;
+    }
+    @keyframes blinkCaret { 50% { opacity: 0; } }
+
+    /* ---------- logo + falcon ---------- */
+    .logo {
       text-align: center;
     }
-
-    .logo {
-      display: block;
-      margin: 0 auto;
+    .logo-wrap {
+      position: relative;
+      display: inline-block;
     }
-
     .logo-text {
-      font-family: 'Ayuthaya', sans-serif;
       font-size: 100px;
       color: #2D6A1F;
       text-shadow: 3px 3px 0px #8B1A1A, 1px 1px 0px #6B1111;
       line-height: 1;
+      transition: opacity 0.2s ease;
     }
-
-    .logo img {
-      height: 130px;
-      width: auto;
+    .owl {
+      position: absolute;
+      top: -10px;
+      right: -34px;
+      width: 32px;
+      height: 36px;
+      overflow: visible;
     }
+    .owl svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .owl path, .owl circle, .owl line, .owl ellipse {
+      stroke: #C8922A;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+    .owl .pupil { fill: #C8922A; stroke: none; }
+    .owl-head {
+      transform-box: fill-box;
+      transform-origin: 50% 100%;
+    }
+    .owl-eyes {
+      transform-box: fill-box;
+      transform-origin: 50% 50%;
+    }
+    .owl-pupils { transform-box: fill-box; }
 
-    .tagline {
-      font-family: 'Ayuthaya', sans-serif;
-      margin-top: 24px;
-      font-size: 13px;
+    /* ---------- intro ---------- */
+    .intro {
+      margin-top: 40px;
+      font-size: 14px;
+      line-height: 1.7;
+      text-align: left;
+    }
+    .intro p + p { margin-top: 16px; }
+
+    /* ---------- building ---------- */
+    .building {
+      margin-top: 44px;
+      text-align: left;
+    }
+    .building-label {
+      font-size: 12px;
+      color: rgba(200, 146, 42, 0.6);
+      margin-bottom: 10px;
+    }
+    .item { border: none; }
+    .item-btn {
+      width: 100%;
+      background: none;
+      border: none;
       color: #C8922A;
-      line-height: 1.8;
+      font-size: 14px;
+      line-height: 1.7;
+      text-align: left;
+      padding: 7px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
     }
+    .item-btn .muted { color: rgba(200, 146, 42, 0.55); }
+    .item-btn:hover .label-text { text-decoration: underline; }
+    .chevron {
+      flex: 0 0 auto;
+      width: 10px;
+      height: 10px;
+      margin-left: 12px;
+      transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .chevron path {
+      stroke: #C8922A;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+    .item-btn[aria-expanded="true"] .chevron { transform: rotate(90deg); }
 
-    .projects {
-      font-family: 'Ayuthaya', sans-serif;
-      margin-top: 36px;
+    .panel-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 350ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .panel-wrap.open { grid-template-rows: 1fr; }
+    .panel-inner {
+      overflow: hidden;
+      min-height: 0;
+    }
+    .panel-content {
+      padding: 4px 0 12px;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 250ms ease, transform 250ms ease;
+    }
+    .panel-wrap.open .panel-content {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 60ms;
+    }
+    .panel-content p {
       font-size: 13px;
-      line-height: 2;
+      line-height: 1.65;
+      color: rgba(200, 146, 42, 0.7);
     }
-
-    .socials {
-      font-family: 'Ayuthaya', sans-serif;
-      margin-top: 32px;
+    .panel-content .visit {
+      display: inline-block;
+      margin-top: 8px;
       font-size: 13px;
-      line-height: 2;
+      color: rgba(200, 146, 42, 0.7);
     }
 
-    .socials-label {
-      font-family: 'Ayuthaya', sans-serif;
-      color: #C8922A;
-      display: block;
-    }
-
+    /* ---------- footer ---------- */
     footer {
-      font-family: 'Ayuthaya', sans-serif;
-      margin-top: 32px;
-      font-size: 11px;
+      margin-top: 48px;
+      font-size: 12px;
+      line-height: 1.9;
+      text-align: left;
       color: #C8922A;
     }
+    footer .row { color: #C8922A; }
 
+    /* ---------- links ---------- */
     a {
-      font-family: 'Ayuthaya', sans-serif;
       color: #C8922A;
       text-decoration: none;
-      display: block;
     }
+    a:hover { text-decoration: underline; }
+    a:visited { color: #C8922A; }
 
-    a:hover {
-      text-decoration: underline;
-    }
-
-    a:visited {
-      font-family: 'Ayuthaya', sans-serif;
-      color: #C8922A;
-    }
-
-    @keyframes fadeIn {
+    /* ---------- load animation ---------- */
+    @keyframes fadeUp {
       from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     .block {
       opacity: 0;
-      animation: fadeIn 0.8s ease forwards;
+      animation: fadeUp 0.8s ease forwards;
     }
 
-    @media (max-width: 380px) {
-      .container {
-        padding: 80px 16px;
-      }
+    @media (max-width: 420px) {
+      .container { padding: 56px 20px 48px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .block { animation: none; opacity: 1; transform: none; }
+      .chevron,
+      .panel-wrap,
+      .panel-content,
+      .logo-text { transition: none; }
+      .panel-content { transition-delay: 0ms; }
+      .greeting .caret { animation: none; }
+      .owl-head,
+      .owl-eyes { animation: none; transition: none; transform: none; }
     }
   </style>
 </head>
 <body>
   <div class="container">
 
-    <div class="block logo" style="animation-delay: 0s;">
-      <img src="public/logo.svg" height="130" alt="خالد" onerror="this.outerHTML='<span class=&quot;logo-text&quot;>خالد</span>'">
+    <div class="block greeting" id="greeting" style="animation-delay: 0s;" aria-live="polite"></div>
+
+    <div class="block logo" style="animation-delay: 0.2s;">
+      <span class="logo-wrap">
+        <span class="logo-text" id="logo-text">خالد</span>
+        <!-- owl mascot (simple line art, inline SVG) -->
+        <svg class="owl" id="owl" viewBox="0 0 40 46" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <!-- body (static) -->
+          <path d="M11 26 C9 33 10 40 15 43 C17 44 23 44 25 43 C30 40 31 33 29 26"/>
+          <!-- feet gripping the logo edge -->
+          <path d="M15 43 L15 45 M14 45 L17 45 M13 45 L13 44"/>
+          <path d="M25 43 L25 45 M23 45 L26 45 M27 45 L27 44"/>
+          <!-- head group (rotates toward cursor) -->
+          <g class="owl-head" id="owl-head">
+            <!-- ear tufts -->
+            <path d="M11 7 L13 13 M29 7 L27 13"/>
+            <!-- round head -->
+            <path d="M20 5 C12 5 7 11 7 18 C7 24 13 28 20 28 C27 28 33 24 33 18 C33 11 28 5 20 5 Z"/>
+            <!-- beak -->
+            <path d="M20 18 L18 21 C19 22 21 22 22 21 Z"/>
+            <!-- eyes + pupils (blink target) -->
+            <g class="owl-eyes" id="owl-eyes">
+              <circle cx="14.5" cy="16" r="4.3"/>
+              <circle cx="25.5" cy="16" r="4.3"/>
+              <g class="owl-pupils" id="owl-pupils">
+                <circle class="pupil" cx="14.5" cy="16" r="1.4"/>
+                <circle class="pupil" cx="25.5" cy="16" r="1.4"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </span>
     </div>
 
-    <div class="block tagline" style="animation-delay: 0.2s;">
-      22yo founder.<br>
-      building &amp; scaling brands
+    <div class="block intro" style="animation-delay: 0.4s;">
+      <p>I'm Khalid. I design and build brands and products, from the first sketch to the final line of code.</p>
+      <p>I run <a href="https://khadstudio.co" target="_blank" rel="noopener">Khad Studio</a>, a design &amp; growth studio that's worked with 100+ brands across 30+ countries. Right now I'm launching <a href="https://routn.xyz" target="_blank" rel="noopener">Routn</a>, building <a href="https://reelhouse.app" target="_blank" rel="noopener">Reelhouse</a>, and working on <a href="https://hilalhq.com" target="_blank" rel="noopener">Hilal</a> with a few others.</p>
+      <p>Previously, I shipped <a href="https://nextstopai.app/" target="_blank" rel="noopener">Nexstop</a>, an AI travel planner.</p>
     </div>
 
-    <div class="block projects" style="animation-delay: 0.4s;">
-      <a href="https://khadstudio.co" target="_blank" rel="noopener">running Khad Studio</a>
-      <a href="https://reelhouse-landing.vercel.app/" target="_blank" rel="noopener">building Reelhouse</a>
-      <a href="https://nextstopai.app/" target="_blank" rel="noopener">building Nexstop</a>
-      <a href="https://routn.lovable.app/" target="_blank" rel="noopener">building Routn</a>
-      <a href="https://www.instagram.com/bykhvlerd/" target="_blank" rel="noopener">designed by khalerd.</a>
-      <a href="https://www.behance.net/khaleedameen" target="_blank" rel="noopener">Creative Direction</a>
+    <div class="block building" style="animation-delay: 0.6s;">
+      <div class="building-label">Building</div>
+      <div class="accordion" id="accordion">
+
+        <div class="item">
+          <button class="item-btn" aria-expanded="false" aria-controls="panel-1">
+            <span class="label-text">Khad Studio</span>
+            <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2 L8 6 L4 10"/></svg>
+          </button>
+          <div class="panel-wrap" id="panel-1" role="region">
+            <div class="panel-inner">
+              <div class="panel-content">
+                <p>A design &amp; growth studio for founders. Brand identity, websites and product design for 100+ brands across 30+ countries.</p>
+                <a class="visit" href="https://khadstudio.co" target="_blank" rel="noopener">visit ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <button class="item-btn" aria-expanded="false" aria-controls="panel-2">
+            <span class="label-text">Routn <span class="muted">· launching now</span></span>
+            <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2 L8 6 L4 10"/></svg>
+          </button>
+          <div class="panel-wrap" id="panel-2" role="region">
+            <div class="panel-inner">
+              <div class="panel-content">
+                <p>A premium routine planner for building days that actually stick.</p>
+                <a class="visit" href="https://routn.xyz" target="_blank" rel="noopener">visit ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <button class="item-btn" aria-expanded="false" aria-controls="panel-3">
+            <span class="label-text">Reelhouse</span>
+            <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2 L8 6 L4 10"/></svg>
+          </button>
+          <div class="panel-wrap" id="panel-3" role="region">
+            <div class="panel-inner">
+              <div class="panel-content">
+                <!-- TODO: one-liner from Khalid -->
+                <p>Coming soon.</p>
+                <a class="visit" href="https://reelhouse.app" target="_blank" rel="noopener">visit ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <button class="item-btn" aria-expanded="false" aria-controls="panel-4">
+            <span class="label-text">Hilal</span>
+            <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2 L8 6 L4 10"/></svg>
+          </button>
+          <div class="panel-wrap" id="panel-4" role="region">
+            <div class="panel-inner">
+              <div class="panel-content">
+                <p>A platform that gives founders access to funding, distribution and visibility, so good ideas don't die quietly.</p>
+                <a class="visit" href="https://hilalhq.com" target="_blank" rel="noopener">visit ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <button class="item-btn" aria-expanded="false" aria-controls="panel-5">
+            <span class="label-text">Nexstop</span>
+            <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2 L8 6 L4 10"/></svg>
+          </button>
+          <div class="panel-wrap" id="panel-5" role="region">
+            <div class="panel-inner">
+              <div class="panel-content">
+                <p>An AI travel planner that turns a destination into a full itinerary in seconds. v1.0 live.</p>
+                <a class="visit" href="https://nextstopai.app/" target="_blank" rel="noopener">visit ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <div class="block socials" style="animation-delay: 0.6s;">
-      <span class="socials-label">Let's connect</span>
-      <a href="mailto:khalerdameen@gmail.com" target="_blank" rel="noopener">Email</a>
-      <a href="https://instagram.com/khalerdameen" target="_blank" rel="noopener">ig:@khalerdameen</a>
-      <a href="https://x.com/khalerdameen" target="_blank" rel="noopener">X:@khalerdameen</a>
-      <a href="https://youtube.com/@khalerddaily" target="_blank" rel="noopener">Youtube</a>
-      <a href="https://cal.com/khalerdameen/15min" target="_blank" rel="noopener">Book a call</a>
-    </div>
-
-    <footer class="block" style="animation-delay: 0.8s;">© khalerdameen 2026</footer>
+    <footer class="block" style="animation-delay: 0.8s;">
+      <div class="row">
+        <a href="mailto:khalerdameen@gmail.com">email</a> ·
+        ig: <a href="https://www.instagram.com/khalerdameen/" target="_blank" rel="noopener">@khalerdameen</a> ·
+        x: <a href="https://x.com/khalerdameen" target="_blank" rel="noopener">@khalerdameen</a>
+      </div>
+      <div class="row">
+        <a href="https://youtube.com/@khalerddaily" target="_blank" rel="noopener">youtube</a> ·
+        <a href="https://cal.com/khalerdameen/15min" target="_blank" rel="noopener">book a call</a>
+      </div>
+      <div class="row" style="margin-top: 16px;">
+        <a href="https://www.instagram.com/bykhvlerd/" target="_blank" rel="noopener">designed by khalerd.</a> ·
+        <a href="https://www.behance.net/khaleedameen" target="_blank" rel="noopener">Creative Direction</a>
+      </div>
+      <div class="row">© khalerdameen 2026 · <span id="uk-time"></span> in London</div>
+    </footer>
 
   </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ================= accordion ================= */
+      (function () {
+        var buttons = Array.prototype.slice.call(document.querySelectorAll('.item-btn'));
+        buttons.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var panel = document.getElementById(btn.getAttribute('aria-controls'));
+            var isOpen = btn.getAttribute('aria-expanded') === 'true';
+            // close all
+            buttons.forEach(function (b) {
+              b.setAttribute('aria-expanded', 'false');
+              var p = document.getElementById(b.getAttribute('aria-controls'));
+              if (p) p.classList.remove('open');
+            });
+            // open this one if it was closed
+            if (!isOpen) {
+              btn.setAttribute('aria-expanded', 'true');
+              panel.classList.add('open');
+            }
+          });
+        });
+      })();
+
+      /* ================= UK time ================= */
+      (function () {
+        var el = document.getElementById('uk-time');
+        if (!el) return;
+        function render() {
+          try {
+            var parts = new Intl.DateTimeFormat('en-GB', {
+              timeZone: 'Europe/London',
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true
+            }).formatToParts(new Date());
+            var h = '', m = '', ap = '';
+            parts.forEach(function (p) {
+              if (p.type === 'hour') h = p.value;
+              else if (p.type === 'minute') m = p.value;
+              else if (p.type === 'dayPeriod') ap = p.value;
+            });
+            el.textContent = h + ':' + m + ap.toLowerCase().replace(/[.\s]/g, '');
+          } catch (e) {}
+        }
+        render();
+        setInterval(render, 30000);
+      })();
+
+      /* ================= owl ================= */
+      (function () {
+        var owl = document.getElementById('owl');
+        var head = document.getElementById('owl-head');
+        var eyes = document.getElementById('owl-eyes');
+        var pupils = document.getElementById('owl-pupils');
+        if (!owl || !head || !eyes || !pupils) return;
+
+        // static owl under reduced motion
+        if (reduceMotion) return;
+
+        var MAX_HEAD = 20;      // deg
+        var MAX_PUPIL = 2;      // px
+        var LERP = 0.12;
+
+        // target vs current (smoothed) values
+        var headTarget = 0, headCur = 0;
+        var pxTarget = 0, pxCur = 0, pyTarget = 0, pyCur = 0;
+
+        function owlCenter() {
+          var r = owl.getBoundingClientRect();
+          return { x: r.left + r.width / 2, y: r.top + r.height * 0.4 };
+        }
+
+        function aimAt(clientX, clientY) {
+          var c = owlCenter();
+          var dx = clientX - c.x, dy = clientY - c.y;
+          // head rotation: angle of the cursor from vertical, clamped
+          var deg = Math.atan2(dx, Math.abs(dy) + 40) * 180 / Math.PI;
+          headTarget = Math.max(-MAX_HEAD, Math.min(MAX_HEAD, deg));
+          // pupils: normalized direction * max offset
+          var dist = Math.sqrt(dx * dx + dy * dy) || 1;
+          pxTarget = Math.max(-MAX_PUPIL, Math.min(MAX_PUPIL, (dx / dist) * MAX_PUPIL));
+          pyTarget = Math.max(-MAX_PUPIL, Math.min(MAX_PUPIL, (dy / dist) * MAX_PUPIL));
+        }
+
+        // continuous rAF lerp loop
+        function tick() {
+          headCur += (headTarget - headCur) * LERP;
+          pxCur += (pxTarget - pxCur) * LERP;
+          pyCur += (pyTarget - pyCur) * LERP;
+          head.style.transform = 'rotate(' + headCur.toFixed(2) + 'deg)';
+          pupils.style.transform = 'translate(' + pxCur.toFixed(2) + 'px,' + pyCur.toFixed(2) + 'px)';
+          requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+
+        // blink: eyelids close (scaleY -> 0.1) for ~120ms
+        function blink() {
+          eyes.style.transform = 'scaleY(0.1)';
+          setTimeout(function () { eyes.style.transform = 'scaleY(1)'; }, 120);
+        }
+        (function scheduleBlink() {
+          setTimeout(function () { blink(); scheduleBlink(); }, 3000 + Math.random() * 3000);
+        })();
+
+        var canHover = window.matchMedia('(hover: hover)').matches;
+
+        if (canHover) {
+          window.addEventListener('mousemove', function (e) {
+            aimAt(e.clientX, e.clientY);
+          });
+        } else {
+          // touch: periodic idle head tilt + pupil glance, then back to centre
+          (function idleLoop() {
+            setTimeout(function () {
+              var dir = Math.random() < 0.5 ? -1 : 1;
+              headTarget = dir * (10 + Math.random() * 8);
+              pxTarget = dir * MAX_PUPIL;
+              pyTarget = (Math.random() - 0.5) * MAX_PUPIL;
+              setTimeout(function () {
+                headTarget = 0; pxTarget = 0; pyTarget = 0;
+              }, 700);
+              idleLoop();
+            }, 5000 + Math.random() * 3000);
+          })();
+        }
+      })();
+
+      /* ================= geo greeting + logo swap ================= */
+      (function () {
+        var greetingEl = document.getElementById('greeting');
+        var logoEl = document.getElementById('logo-text');
+        if (!greetingEl) return;
+
+        var friendMap = {
+          ja: '友達', zh: '朋友', ko: '친구', fr: 'ami', es: 'amigo',
+          de: 'Freund', pt: 'amigo', ar: 'صديق', ru: 'друг', tr: 'arkadaş',
+          hi: 'दोस्त', sw: 'rafiki', ha: 'aboki', yo: 'ọrẹ', ig: 'enyi'
+        };
+        var logoMap = { zh: '哈利德', ko: '칼리드', ru: 'Халид', hi: 'ख़ालिद', el: 'Χάλιντ' };
+
+        function partOfDay(tz) {
+          var hour;
+          try {
+            hour = parseInt(new Intl.DateTimeFormat('en-US', {
+              timeZone: tz, hour: 'numeric', hour12: false
+            }).format(new Date()), 10);
+          } catch (e) {
+            hour = new Date().getHours();
+          }
+          if (hour >= 5 && hour < 12) return 'morning';
+          if (hour >= 12 && hour < 18) return 'afternoon';
+          return 'evening';
+        }
+
+        function typeOut(text) {
+          var i = 0;
+          var caret = document.createElement('span');
+          caret.className = 'caret';
+          caret.textContent = ' ';
+          greetingEl.textContent = '';
+          greetingEl.appendChild(caret);
+          (function tick() {
+            if (i < text.length) {
+              caret.insertAdjacentText('beforebegin', text.charAt(i));
+              i++;
+              setTimeout(tick, 35);
+            } else {
+              setTimeout(function () { if (caret.parentNode) caret.parentNode.removeChild(caret); }, 600);
+            }
+          })();
+        }
+
+        function swapLogo(code) {
+          var target = logoMap[code];
+          if (!logoEl || !target) return;
+          logoEl.style.opacity = '0';
+          setTimeout(function () {
+            logoEl.textContent = target;
+            logoEl.style.opacity = '1';
+          }, 200);
+        }
+
+        var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+        var timedOut = false;
+        var timer = setTimeout(function () {
+          timedOut = true;
+          if (controller) controller.abort();
+        }, 3000);
+
+        fetch('https://ipapi.co/json/', controller ? { signal: controller.signal } : {})
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            clearTimeout(timer);
+            if (timedOut || !data || !data.city) { greetingEl.style.display = 'none'; return; }
+            var tz = data.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone;
+            var langRaw = (data.languages || '').split(',')[0] || '';
+            var code = langRaw.split('-')[0].toLowerCase();
+            var friend = friendMap[code] || 'friend';
+            var greet = 'Good ' + partOfDay(tz) + ', ' + friend + ' from ' + data.city;
+            typeOut(greet);
+            swapLogo(code);
+          })
+          .catch(function () {
+            clearTimeout(timer);
+            // fetch failed or timed out: hide greeting, keep خالد
+            greetingEl.style.display = 'none';
+          });
+      })();
+
+    })();
+  </script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
