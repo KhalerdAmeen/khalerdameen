@@ -111,6 +111,63 @@
     }
     .intro p + p { margin-top: 16px; }
 
+    /* ---------- intro link glitch (RGB-split) ---------- */
+    .intro p a {
+      position: relative;
+      display: inline-block;
+      color: #C8922A;
+      text-decoration: underline dotted rgba(200, 146, 42, 0.4);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+    .intro p a:hover,
+    .intro p a:focus-visible {
+      text-decoration: underline dotted rgba(200, 146, 42, 0.4);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+    .intro p a::before,
+    .intro p a::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      opacity: 0;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .intro p a::before { color: #2D6A1F; } /* green copy */
+    .intro p a::after  { color: #8B1A1A; } /* red copy */
+
+    @keyframes glitchGreen {
+      0%   { opacity: 0;   transform: translate(0, 0);     clip-path: inset(0 0 0 0); }
+      15%  { opacity: 0.9; transform: translate(-2px, -2px); clip-path: inset(0 0 68% 0); }
+      35%  { opacity: 0.9; transform: translate(-3px, -1px); clip-path: inset(42% 0 20% 0); }
+      60%  { opacity: 0.9; transform: translate(-2px, -3px); clip-path: inset(66% 0 8% 0); }
+      80%  { opacity: 0.9; transform: translate(-3px, -1px); clip-path: inset(12% 0 55% 0); }
+      100% { opacity: 0;   transform: translate(0, 0);     clip-path: inset(0 0 0 0); }
+    }
+    @keyframes glitchRed {
+      0%   { opacity: 0;   transform: translate(0, 0);    clip-path: inset(0 0 0 0); }
+      15%  { opacity: 0.9; transform: translate(2px, 2px); clip-path: inset(55% 0 12% 0); }
+      35%  { opacity: 0.9; transform: translate(3px, 1px); clip-path: inset(18% 0 45% 0); }
+      60%  { opacity: 0.9; transform: translate(2px, 3px); clip-path: inset(5% 0 70% 0); }
+      80%  { opacity: 0.9; transform: translate(3px, 1px); clip-path: inset(60% 0 15% 0); }
+      100% { opacity: 0;   transform: translate(0, 0);    clip-path: inset(0 0 0 0); }
+    }
+    /* one-time touch sequence (JS-driven) */
+    .intro p a.glitching::before { animation: glitchGreen 300ms linear 1; }
+    .intro p a.glitching::after  { animation: glitchRed 300ms linear 1; }
+
+    /* hover + keyboard focus triggers, hover-capable devices only */
+    @media (hover: hover) {
+      .intro p a:hover::before,
+      .intro p a:focus-visible::before { animation: glitchGreen 300ms linear 1; }
+      .intro p a:hover::after,
+      .intro p a:focus-visible::after  { animation: glitchRed 300ms linear 1; }
+    }
+
     /* ---------- building ---------- */
     .building {
       margin-top: 44px;
@@ -229,6 +286,8 @@
       .greeting .caret { animation: none; }
       .owl-head,
       .owl-eyes { animation: none; transition: none; transform: none; }
+      .intro p a::before,
+      .intro p a::after { animation: none !important; opacity: 0 !important; }
     }
   </style>
 </head>
@@ -271,8 +330,8 @@
 
     <div class="block intro" style="animation-delay: 0.4s;">
       <p>I'm Khalid. I design and build brands and products, from the first sketch to the final line of code.</p>
-      <p>I run <a href="https://khadstudio.co" target="_blank" rel="noopener">Khad Studio</a>, a design &amp; growth studio that's worked with 100+ brands across 30+ countries. Right now I'm launching <a href="https://routn.xyz" target="_blank" rel="noopener">Routn</a>, building <a href="https://reelhouse.app" target="_blank" rel="noopener">Reelhouse</a>, and working on <a href="https://hilalhq.com" target="_blank" rel="noopener">Hilal</a> with a few others.</p>
-      <p>Previously, I shipped <a href="https://nextstopai.app/" target="_blank" rel="noopener">Nexstop</a>, an AI travel planner.</p>
+      <p>I run <a href="https://khadstudio.co" target="_blank" rel="noopener" data-text="Khad Studio">Khad Studio</a>, a design &amp; growth studio that's worked with 100+ brands across 30+ countries. Right now I'm launching <a href="https://routn.xyz" target="_blank" rel="noopener" data-text="Routn">Routn</a> and <a href="https://context-labs.net" target="_blank" rel="noopener" data-text="Context Labs">Context Labs</a>, building <a href="https://reelhouse-landing.vercel.app/" target="_blank" rel="noopener" data-text="Reelhouse">Reelhouse</a>, and working on <a href="https://hilalhq.com" target="_blank" rel="noopener" data-text="Hilal">Hilal</a> with a few others.</p>
+      <p>Previously, I shipped <a href="https://nextstopai.app/" target="_blank" rel="noopener" data-text="Nexstop">Nexstop</a>, an AI travel planner.</p>
     </div>
 
     <div class="block building" style="animation-delay: 0.6s;">
@@ -310,6 +369,21 @@
         </div>
 
         <div class="item">
+          <button class="item-btn" aria-expanded="false" aria-controls="panel-6">
+            <span class="label-text">Context Labs <span class="muted">· new</span></span>
+            <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2 L8 6 L4 10"/></svg>
+          </button>
+          <div class="panel-wrap" id="panel-6" role="region">
+            <div class="panel-inner">
+              <div class="panel-content">
+                <p>A free library of AI context files and Claude skills, the setup I use to build with AI, open for anyone to use.</p>
+                <a class="visit" href="https://context-labs.net" target="_blank" rel="noopener">visit ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
           <button class="item-btn" aria-expanded="false" aria-controls="panel-3">
             <span class="label-text">Reelhouse</span>
             <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2 L8 6 L4 10"/></svg>
@@ -317,9 +391,8 @@
           <div class="panel-wrap" id="panel-3" role="region">
             <div class="panel-inner">
               <div class="panel-content">
-                <!-- TODO: one-liner from Khalid -->
-                <p>Coming soon.</p>
-                <a class="visit" href="https://reelhouse.app" target="_blank" rel="noopener">visit ↗</a>
+                <p>A personal cinema journal. Log films and shows, build your taste profile, and discover what to watch next.</p>
+                <a class="visit" href="https://reelhouse-landing.vercel.app/" target="_blank" rel="noopener">visit ↗</a>
               </div>
             </div>
           </div>
@@ -507,6 +580,29 @@
             }, 5000 + Math.random() * 3000);
           })();
         }
+      })();
+
+      /* ================= intro link glitch (one-time touch sequence) ================= */
+      (function () {
+        if (reduceMotion) return;
+        // hover devices glitch on hover/focus via CSS; this is only for touch.
+        if (window.matchMedia('(hover: hover)').matches) return;
+
+        var links = Array.prototype.slice.call(document.querySelectorAll('.intro p a'));
+        if (!links.length) return;
+
+        function glitchOnce(el) {
+          el.classList.add('glitching');
+          setTimeout(function () { el.classList.remove('glitching'); }, 320);
+        }
+
+        // intro block: animation-delay 0.4s + fadeUp 0.8s ≈ 1.2s to finish.
+        var START = 1300;
+        setTimeout(function () {
+          links.forEach(function (el, i) {
+            setTimeout(function () { glitchOnce(el); }, i * 150);
+          });
+        }, START);
       })();
 
       /* ================= geo greeting + logo swap ================= */
